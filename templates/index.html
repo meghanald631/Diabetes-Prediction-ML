@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #174ea6;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #174ea6;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #174ea6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #103b80;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #b91c1c;
+            background: #fee2e2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Diabetes Prediction</h1>
+        <p>Enter the patient's details below.</p>
+
+        <form action="/predict" method="POST">
+
+            <div class="form-group">
+                <label for="num_preg">Number of Pregnancies</label>
+                <input type="number" id="num_preg"
+                       name="num_preg" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="glucose_conc">Glucose Concentration</label>
+                <input type="number" id="glucose_conc"
+                       name="glucose_conc" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="diastolic_bp">Diastolic Blood Pressure</label>
+                <input type="number" id="diastolic_bp"
+                       name="diastolic_bp" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="thickness">Skin Thickness</label>
+                <input type="number" id="thickness"
+                       name="thickness" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="insulin">Insulin Level</label>
+                <input type="number" id="insulin"
+                       name="insulin" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bmi">BMI</label>
+                <input type="number" id="bmi"
+                       name="bmi" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="diab_pred">Diabetes Pedigree Function</label>
+                <input type="number" id="diab_pred"
+                       name="diab_pred" min="0" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age"
+                       name="age" min="1" step="any" required>
+            </div>
+
+            <button type="submit">Predict Diabetes</button>
+        </form>
+
+        {% if prediction is defined %}
+            <div class="result">
+                {% if prediction == 1 %}
+                    Prediction: Diabetes detected (1)
+                {% else %}
+                    Prediction: Diabetes not detected (0)
+                {% endif %}
+            </div>
+            <p>This is a machine-learning estimate, not a medical diagnosis.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
